@@ -4,9 +4,40 @@
 #include"premiershipdatabase.h"
 #include"result.h"
 #include"premiership.h"
+#include<semaphore.h>
+#include<pthread.h>
 #include <gtest/gtest.h>
 using namespace std;
 
+pthread_mutex_t m1=PTHREAD_MUTEX_INITIALIZER;
+sem_t s1;
+PremiershipDatabase football;
+
+
+void* efun1(void* pv){
+
+
+
+        pthread_mutex_lock(&m1);
+        football.addFixtures(40,"Liverpool", "Everton","F.Byrch",3,3,14,3,20,1,0);
+        football.addFixtures(40, "Tottenham","Leicester","F.Reviere",3,0,5,2,12,2,2);
+        football.addFixtures(40,"Derby", "Blackpool","A.Benjamin",0,2,2,7,13,2,1); 
+        pthread_mutex_unlock(&m1);
+        sem_post(&s1);
+
+}
+
+
+void* efun2(void* pv)        
+{
+
+
+        sem_wait(&s1);            
+        pthread_mutex_lock(&m1);
+
+        pthread_mutex_unlock(&m1);
+        
+}
 namespace {
 
 class PremiershipDatabaseTest : public ::testing::Test {
@@ -64,6 +95,21 @@ protected:
   PremiershipDatabase P1;
 };
 
+TEST_F(PremiershipDatabaseTest, AddFixtureSemTest) {
+
+    pthread_t pt1,pt2;    
+    sem_init(&s1,0,0);
+    pthread_create(&pt1,NULL,efun1,NULL);
+    pthread_create(&pt2,NULL,efun2,NULL);
+    pthread_join(pt1,NULL);
+    pthread_join(pt2,NULL);
+
+    football.addFixtures(16, "Man City","Man United","Josep",4,5,18,6,14,4,0);
+    EXPECT_EQ(4, football.countAll());
+
+    sem_destroy(&s1);
+    pthread_mutex_destroy(&m1);
+}
 
 TEST_F(PremiershipDatabaseTest, AddFixtureTest) 
 {
@@ -98,4 +144,7 @@ TEST_F(PremiershipDatabaseTest, Goalsscoredinround)
 {
   EXPECT_EQ(36, P1.computegoalsscoredinround(27));
 }
+
 }
+
+

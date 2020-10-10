@@ -17,9 +17,12 @@ jobs:
       run: |
         sudo apt-get -y install valgrind
         sudo apt-get -y install libcunit1 libcunit1-doc libcunit1-dev 
-    - name: make test
-      run: |
-    - name: valgrindcheck  
-      run: chmod a+x all.out
-    - name: valgrindcheck1  
+    - name: Install gtest manually
+      run: sudo apt-get install libgtest-dev && cd /usr/src/gtest && sudo cmake CMakeLists.txt && sudo make && sudo cp *.a /usr/lib && sudo ln -s /usr/lib/libgtest.a /usr/local/lib/libgtest.a && sudo ln -s /usr/lib/libgtest_main.a /usr/local/lib/libgtest_main.a
+    - uses: actions/checkout@v1
+    - name: cmake
+      run:  cmake CMakeLists.txt 
+    - name: make
+      run: make
+    - name: Valgrind
       run: valgrind ./all.out

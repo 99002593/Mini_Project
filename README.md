@@ -3,9 +3,9 @@
 
 
 |cppcheck|Valgrind|
-|:--:|:--:|:--:|
+|:--:|:--:|
 |![cppcheck-action](https://github.com/99002593/Mini_Project/workflows/cppcheck-action/badge.svg)|
-|![Valgrind](https://github.com/99002593/Mini_Project/workflows/Valgrind/badge.svg)|
+![Valgrind](https://github.com/99002593/Mini_Project/workflows/Valgrind/badge.svg)|
 
 
 

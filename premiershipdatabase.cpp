@@ -33,7 +33,7 @@ Statistics* PremiershipDatabase::findFixtureByround(int matchround)
 {
 		 std::list<Statistics> :: iterator iter;
 		 
-		 for(iter=footy.begin();iter!=footy.end();iter++)
+		 for(iter=footy.begin();iter!=footy.end();++iter)
 		 {
 		 	
         	if(matchround == iter->getround())
@@ -48,7 +48,7 @@ int PremiershipDatabase::computegoalsscoredinround(int round)
 {
 	 int count=0;
    std::list <Statistics> :: iterator iter;
-   for(iter=footy.begin();iter!=footy.end();iter++)
+   for(iter=footy.begin();iter!=footy.end();++iter)
    {
        if(iter->getround() == round)
         count = count+(iter->gethomegoals()+iter->getawaygoals());
@@ -62,7 +62,7 @@ int PremiershipDatabase::countHomeFixturesbyTeam(std::string hteam)
 {
 	 int count=0;
    std::list <Statistics> :: iterator iter;
-   for(iter=footy.begin();iter!=footy.end();iter++)
+   for(iter=footy.begin();iter!=footy.end();++iter)
    {
        if(iter->gethometeam() == hteam)
         count++;

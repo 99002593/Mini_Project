@@ -19,7 +19,7 @@ void PremiershipDatabase::removeFixture(int matchround)
 	
 	    std::list<Statistics> :: iterator iter;
 	    
-	    for(iter=footy.begin();iter!=footy.end();iter++)
+	    for(iter=footy.begin();iter!=footy.end();++iter)
 	    {
         	if(iter->getround()== matchround)
         	{

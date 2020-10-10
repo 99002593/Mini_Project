@@ -1,6 +1,6 @@
 all: all.out
 all.out : premiership.o premiershipdatabase.o result.o result_test.o premiershipdbtest.o
-	g++ $^ -lgtest -lgtest_main -lpthread -o $@ 
+	g++ $^ -o $@ -lgtest -lgtest_main -lpthread 
 premiershipdbtest.o: premiershipdbtest.cpp result.h premiership.h premiershipdatabase.h
 	g++ $< -c
 result_test.o: result_test.cpp result.h premiership.h

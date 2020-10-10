@@ -8,9 +8,9 @@
 
 
 ## Integrated Tools to GitHub
-*  [Codacy](https://www.codacy.com/)
+  *  [Codacy](https://www.codacy.com/)
 
 ## GitHub Actions
-* Build using Make for CI
-* Static code analysis using cppcheck
-* Dynamic Code analysis using Valgrind
+  * Build using Make for CI
+  * Static code analysis using cppcheck
+  * Dynamic Code analysis using Valgrind
